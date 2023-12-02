@@ -1,0 +1,34 @@
+@startuml
+class AlgorithmA {
+  + calculateFinalScore(Double, Double): Double
+}
+
+class TestCase {
+  + {static} main(String[]): void
+}
+
+class Student {
+  - name: String
+  - assignment: Double
+  - exam: Double
+  - scoringAlgorithm: ScoringAlgorithmStrategy
+  + <<Create>> Student(String)
+  + getName(): String
+  + setAssignmentScore(double): void
+  + setExamScore(double): void
+  + setScoringAlgorithm(ScoringAlgorithmStrategy): void
+  + getFinalScore(): Double
+}
+
+interface ScoringAlgorithmStrategy {
+  + calculateFinalScore(Double, Double): Double
+}
+
+class AlgorithmB {
+  + calculateFinalScore(Double, Double): Double
+}
+
+ScoringAlgorithmStrategy <|.. AlgorithmA
+ScoringAlgorithmStrategy <|.. AlgorithmB
+Student *-down-> ScoringAlgorithmStrategy
+@enduml
